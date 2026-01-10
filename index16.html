@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUSHPAK INFOTech | Digital Marketing Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e293b;
+            --accent: #f59e0b;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* 3D Social Icons Effect */
+        .social-3d {
+            transition: transform 0.3s, box-shadow 0.3s;
+            perspective: 1000px;
+        }
+        .social-3d:hover {
+            transform: translateY(-5px) rotateX(10deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Animation - Thinking Man Circle */
+        .thinking-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .thinking-man {
+            font-size: 8rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            color: #3b82f6;
+        }
+        .orbit-circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px dashed rgba(59, 130, 246, 0.3);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+        .orbit-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        /* Positioning icons on the circle */
+        .orbit-icon:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        .orbit-icon:nth-child(2) { top: 50%; right: 0; transform: translate(50%, -50%); }
+        .orbit-icon:nth-child(3) { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+        .orbit-icon:nth-child(4) { top: 50%; left: 0; transform: translate(-50%, -50%); }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .chatbot-btn {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.5);
+            animation: pulse 2s infinite;
+        }
+        .chat-window {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .chat-header {
+            background: #1e293b;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+        }
+        .chat-body {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8fafc;
+        }
+        .chat-msg {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            max-width: 80%;
+        }
+        .bot-msg { background: #e0e7ff; color: #1e293b; align-self: flex-start; }
+        .user-msg { background: #2563eb; color: white; margin-left: auto; }
+        .chat-options button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 8px;
+            margin-top: 5px;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .chat-options button:hover { background: #f1f5f9; }
+
+        /* Infinite Slider for Clients - UPDATED FOR 10 CLIENTS */
+        .slider-track {
+            display: flex;
+            width: calc(250px * 20); /* 10 clients * 2 for loop */
+            animation: scroll 40s linear infinite;
+        }
+        .slide {
+            width: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center images */
+            padding: 15px;
+        }
+        .slide img {
+            max-height: 100px; /* Constrain height for uniformity */
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(60%); /* Optional: makes them look uniform */
+            transition: filter 0.3s;
+        }
+        .slide img:hover {
+            filter: grayscale(0%); /* Color on hover */
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 7)); } /* Scroll by half total width */
+        }
+
+        /* Pricing Card Hover */
+        .price-card:hover {
+            transform: translateY(-10px);
+            border-color: #2563eb;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Results Slider */
+        .result-slide {
+            display: none;
+            animation: fadeEffect 1.5s;
+        }
+        .result-slide.active { display: block; }
+        @keyframes fadeEffect {
+            from {opacity: 0.4} 
+            to {opacity: 1}
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-700 flex items-center gap-2">
+                <i class="fa-solid fa-rocket"></i> PUSHPAK INFOTech
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-blue-600 font-medium">Home</a>
+                <a href="#about" class="hover:text-blue-600 font-medium">About</a>
+                <a href="#services" class="hover:text-blue-600 font-medium">Services</a>
+                <a href="#results" class="hover:text-blue-600 font-medium">Results</a>
+                <a href="#pricing" class="hover:text-blue-600 font-medium">Pricing</a>
+            </div>
+            <div class="hidden md:flex space-x-4">
+                <a href="https://www.facebook.com/pushpak.tripathi.739" target="_blank" class="social-3d text-blue-600 text-xl"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/mr._pushpak_tripathi/" target="_blank" class="social-3d text-pink-600 text-xl"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/917070639806" target="_blank" class="social-3d text-green-500 text-xl"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://x.com/PushpakTripath4" target="_blank" class="social-3d text-black text-xl"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80')] bg-cover bg-center"></div>
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 z-10">
+                <div class="inline-block bg-blue-600 text-xs font-bold px-2 py-1 rounded mb-4">PREMIUM AGENCY 🚀</div>
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                    We Build Your <span class="text-blue-400">Digital Empire</span>
+                </h1>
+                <p class="text-lg text-gray-300 mb-8">
+                    PUSHPAK INFOTech helps 20+ clients achieve real-time profits through strategic Meta Ads, Google Ads, and Creative Branding.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#pricing" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition shadow-lg shadow-blue-500/50">Get Started</a>
+                    <a href="#results" class="border border-white hover:bg-white hover:text-black px-8 py-3 rounded-full font-bold transition">View Results</a>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center z-10">
+                <div class="thinking-container">
+                    <i class="fas fa-user-astronaut thinking-man"></i>
+                    
+                    <div class="orbit-circle">
+                        <div class="orbit-icon text-blue-600"><i class="fas fa-chart-line"></i></div>
+                        <div class="orbit-icon text-green-500"><i class="fas fa-search-dollar"></i></div>
+                        <div class="orbit-icon text-purple-600"><i class="fas fa-bullhorn"></i></div>
+                        <div class="orbit-icon text-red-500"><i class="fas fa-video"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-blue-600 py-1 border-b">
+        <div class="overflow-hidden">
+            <div class="slider-track">
+                <div class="slide"><img src="MK Fit.PNG" alt="MK Fit"></div>
+                <div class="slide"><img src="Popular Agencies.png" alt="Popular Agencies"></div>
+                <div class="slide"><img src="Pickleball.png" alt="Pickle Ball Arena"></div>
+                <div class="slide"><img src="School Logo.png" alt="Memo"></div>
+                <div class="slide"><img src="Sindhi garba.PNG" alt="Sindhi Garba"></div>
+                <div class="slide"><img src="Aroma.png" alt="Aroma & Leaf"></div>
+                <div class="slide"><img src="RK Tour.png" alt="RK Tours"></div>
+                <div class="slide"><img src="Siwani Badal.PNG" alt="Dr Shivani"></div>
+                <div class="slide"><img src="PinkStdio.PNG" alt="Pink Studio"></div>
+                <div class="slide"><img src="Attirevilla.png" alt="Attire Villa"></div>
+                
+                <div class="slide"><img src="MK Fit.PNG" alt="MK Fit"></div>
+                <div class="slide"><img src="Popular Agencies.png" alt="Popular Agencies"></div>
+                <div class="slide"><img src="Pickleball.png" alt="Pickle Ball Arena"></div>
+                <div class="slide"><img src="School Logo.png" alt="Memo"></div>
+                <div class="slide"><img src="Sindhi garba.PNG" alt="Sindhi Garba"></div>
+                <div class="slide"><img src="Aroma.png" alt="Aroma & Leaf"></div>
+                <div class="slide"><img src="RK Tour.png" alt="RK Tours"></div>
+                <div class="slide"><img src="Siwani Badal.PNG" alt="Dr Shivani"></div>
+                <div class="slide"><img src="PinkStdio.PNG" alt="Pink Studio"></div>
+                <div class="slide"><img src="Attirevilla.png" alt="Attire Villa"></div>
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Team" class="rounded-2xl shadow-2xl">
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-4xl font-bold mb-6 text-slate-800">About PUSHPAK INFOTech</h2>
+                <div class="prose text-gray-600 leading-relaxed">
+                    <p class="mb-4"><strong>PUSHPAK INFOTech</strong> is a full-service <strong>Digital Marketing & IT Solutions Agency</strong> dedicated to helping businesses build a powerful digital presence and achieve real, measurable growth. We believe that in the digital age, success comes from the right mix of <strong>strategy, creativity, and technology</strong>.</p>
+                    
+                    <p class="mb-4">Our services include <strong>website design & development, social media management, creative graphics & video content, digital advertising (Meta & Google Ads), brand promotion, and complete online campaign handling</strong>. Every solution we deliver is customized to match your brand identity and business objectives.</p>
+                    
+                    <p class="mb-4">At PUSHPAK INFOTech, we don’t just work <em>for</em> clients—we work <em>with</em> them as a trusted digital partner. Whether you are a startup, small business, or growing brand, our goal is to turn your ideas into impactful digital experiences that drive visibility, engagement, and conversions.</p>
+                    
+                    <p class="font-bold text-blue-600 mt-6 text-lg">Your growth is our priority, and your success defines our work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-800 mb-4">Our Premium Services 🛠️</h2>
+                <p class="text-gray-500">Comprehensive solutions for your digital growth</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <i class="fab fa-instagram text-9xl text-pink-500"></i>
+                    </div>
+                    <div class="text-4xl text-pink-500 mb-4"><i class="fas fa-share-nodes"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Social Media Handling</h3>
+                    <p class="text-gray-600 mb-4">Complete management of your Instagram, Facebook, and LinkedIn profiles to boost organic reach.</p>
+                    <button class="text-blue-600 font-bold group-hover:underline">
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <i class="fas fa-video text-9xl text-red-500"></i>
+                    </div>
+                    <div class="text-4xl text-red-500 mb-4"><i class="fas fa-play-circle"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Videos & Graphics</h3>
+                    <p class="text-gray-600 mb-4">High-quality reels, posts, and festival creatives designed to engage your audience.</p>
+                    <button class="text-blue-600 font-bold group-hover:underline">
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <i class="fab fa-google text-9xl text-blue-500"></i>
+                    </div>
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-bullseye"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Meta & Google Ads</h3>
+                    <p class="text-gray-600 mb-4">Strategic budget setting and campaign running to maximize ROI and leads.</p>
+                    <button class="text-blue-600 font-bold group-hover:underline">
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <i class="fas fa-laptop-code text-9xl text-green-500"></i>
+                    </div>
+                    <div class="text-4xl text-green-500 mb-4"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Website Building</h3>
+                    <p class="text-gray-600 mb-4">Responsive, SEO-friendly websites that convert visitors into loyal customers.</p>
+                    <button class="text-blue-600 font-bold group-hover:underline">
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <i class="fas fa-users text-9xl text-purple-500"></i>
+                    </div>
+                    <div class="text-4xl text-purple-500 mb-4"><i class="fas fa-users"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Audience Connect</h3>
+                    <p class="text-gray-600 mb-4">Building a community around your brand to ensure long-term growth and trust.</p>
+                    <button class="text-blue-600 font-bold group-hover:underline">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="results" class="py-20 bg-slate-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12">Our Proven Results 📊</h2>
+            
+            <div class="relative w-full max-w-4xl mx-auto h-[400px] bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
+                <div class="result-slide active w-full h-full flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center">
+                    <div class="bg-black/70 p-8 rounded-xl backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold text-green-400">Client: Retail Store</h3>
+                        <p class="text-xl">ROI: 300% Increase in Walk-ins</p>
+                        <p class="text-sm mt-2 text-gray-300">Campaign: Google Local Ads</p>
+                    </div>
+                </div>
+                <div class="result-slide w-full h-full flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center">
+                    <div class="bg-black/70 p-8 rounded-xl backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold text-blue-400">Client: Tech Startup</h3>
+                        <p class="text-xl">Leads: 500+ Qualified Leads/Month</p>
+                        <p class="text-sm mt-2 text-gray-300">Campaign: Meta Lead Gen</p>
+                    </div>
+                </div>
+                <div class="result-slide w-full h-full flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center">
+                    <div class="bg-black/70 p-8 rounded-xl backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold text-purple-400">Client: Fashion Brand</h3>
+                        <p class="text-xl">Sales: ₹10 Lakh+ Revenue</p>
+                        <p class="text-sm mt-2 text-gray-300">Campaign: Instagram Reels & Influencer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex justify-center gap-4">
+                <button onclick="changeSlide(-1)" class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-full"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="changeSlide(1)" class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-full"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-slate-800 mb-16">Choose Your Growth Plan 💎</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="price-card border border-gray-200 rounded-2xl p-8 bg-white shadow-lg transition duration-300 flex flex-col">
+                    <h3 class="text-xl font-bold text-gray-500 mb-2">Starter</h3>
+                    <div class="text-4xl font-bold text-slate-800 mb-6">₹9,999<span class="text-sm font-normal text-gray-500">/mo</span></div>
+                    <ul class="text-gray-600 mb-8 space-y-3 flex-grow">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 7 Videos</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Monthly Festival Creatives</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 5 Post Creatives</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Social Media Handling</li>
+                    </ul>
+                    <a href="https://wa.me/917070639806?text=Hi PUSHPAK INFOTech, I am interested in the Starter Plan (₹9,999)." target="_blank" class="block w-full text-center bg-gray-800 hover:bg-black text-white py-3 rounded-lg font-bold transition">Choose Plan</a>
+                </div>
+
+                <div class="price-card border-2 border-blue-500 rounded-2xl p-8 bg-white shadow-xl transform scale-105 relative flex flex-col">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                    <h3 class="text-xl font-bold text-blue-600 mb-2">Growth</h3>
+                    <div class="text-4xl font-bold text-slate-800 mb-6">₹14,999<span class="text-sm font-normal text-gray-500">/mo</span></div>
+                    <ul class="text-gray-600 mb-8 space-y-3 flex-grow">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 12 Videos</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Monthly Festival Creatives</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 8 Post Creatives</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Social Media Handling</li>
+                        <li><i class="fas fa-fire text-orange-500 mr-2"></i> Trending/Viral Hashtags</li>
+                    </ul>
+                    <a href="https://wa.me/917070639806?text=Hi PUSHPAK INFOTech, I am interested in the Growth Plan (₹14,999)." target="_blank" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-bold transition">Choose Plan</a>
+                </div>
+
+                <div class="price-card border border-gray-200 rounded-2xl p-8 bg-white shadow-lg transition duration-300 flex flex-col">
+                    <h3 class="text-xl font-bold text-purple-600 mb-2">Pro Scale</h3>
+                    <div class="text-4xl font-bold text-slate-800 mb-6">₹19,999<span class="text-sm font-normal text-gray-500">/mo</span></div>
+                    <ul class="text-gray-600 mb-8 space-y-3 flex-grow">
+                        <li><i class="fas fa-star text-yellow-500 mr-2"></i> 15 Videos (Best Quality)</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Monthly Festival Creatives</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 10 Post Creatives</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Social Media Handling</li>
+                        <li><i class="fas fa-fire text-orange-500 mr-2"></i> Trending/Viral Hashtags</li>
+                        <li><i class="fas fa-chart-line text-blue-500 mr-2"></i> Ads Strategy</li>
+                    </ul>
+                    <a href="https://wa.me/917070639806?text=Hi PUSHPAK INFOTech, I am interested in the Pro Scale Plan (₹19,999)." target="_blank" class="block w-full text-center bg-gray-800 hover:bg-black text-white py-3 rounded-lg font-bold transition">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">PUSHPAK INFOTech</h3>
+                    <p class="text-gray-400 mb-6">Turning your ideas into impactful digital experiences that drive visibility, engagement, and conversions.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/pushpak.tripathi.739" class="text-gray-400 hover:text-white text-xl transition"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/mr._pushpak_tripathi/" class="text-gray-400 hover:text-white text-xl transition"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/PushpakTripath4" class="text-gray-400 hover:text-white text-xl transition"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Contact Us</h4>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-phone mr-2"></i> +91 7070639806</p>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-envelope mr-2"></i> pushpaktripathi12@gmail.com</p>
+                    <p class="text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i> India</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Location</h4>
+                    <div class="rounded-lg overflow-hidden h-40 bg-gray-800">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.23275098939!2d83.0!3d25.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDE4JzAwLjAiTiA4M8KwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-gray-500">
+                <p>© 2026 PUSHPAK INFOTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="chatbot-container">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header flex justify-between items-center">
+                <span>Pushpak's Assistant 🤖</span>
+                <span onclick="toggleChat()" class="cursor-pointer hover:text-red-400">×</span>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="chat-msg bot-msg">
+                    Hi! Welcome to PUSHPAK INFOTech. How can I help you today?
+                </div>
+                <div class="chat-options">
+                    <button onclick="handleOption('price')">💰 What are your prices?</button>
+                    <button onclick="handleOption('content')">📹 What content do you make?</button>
+                    <button onclick="handleOption('budget')">📉 What budget is needed for ads?</button>
+                    <button onclick="handleOption('agreement')">📝 Do you have agreements?</button>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-btn" onclick="toggleChat()">
+            <i class="fas fa-comments text-2xl"></i>
+        </div>
+    </div>
+
+    <script>
+        // Chatbot Logic
+        const chatWindow = document.getElementById('chatWindow');
+        const chatBody = document.getElementById('chatBody');
+
+        function toggleChat() {
+            if (chatWindow.style.display === 'block') {
+                chatWindow.style.display = 'none';
+            } else {
+                chatWindow.style.display = 'block';
+            }
+        }
+
+        function handleOption(type) {
+            let userText = "";
+            let botText = "";
+
+            if (type === 'price') {
+                userText = "💰 What are your prices?";
+                botText = "We have 3 plans starting from ₹9999/mo. Check our Pricing section for details on videos, posts, and social handling!";
+            } else if (type === 'content') {
+                userText = "📹 What content do you make?";
+                botText = "We create Reels, Graphics, Festival Posts, and Viral content tailored to your brand niche.";
+            } else if (type === 'budget') {
+                userText = "📉 What budget is needed for ads?";
+                botText = "Ad budgets are separate from our fees. We recommend starting small (e.g., ₹500/day) and scaling up based on ROI.";
+            } else if (type === 'agreement') {
+                userText = "📝 Do you have agreements?";
+                botText = "Yes, we work with transparent agreements to ensure mutual trust and clear deliverables for all 20+ clients.";
+            }
+
+            // Append User Message
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = 'chat-msg user-msg';
+            userMsgDiv.innerText = userText;
+            chatBody.insertBefore(userMsgDiv, chatBody.lastElementChild); // Insert before options
+
+            // Append Bot Message with slight delay
+            setTimeout(() => {
+                const botMsgDiv = document.createElement('div');
+                botMsgDiv.className = 'chat-msg bot-msg';
+                botMsgDiv.innerText = botText;
+                chatBody.insertBefore(botMsgDiv, chatBody.lastElementChild);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 500);
+        }
+
+        // Image Slider Logic
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("result-slide");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "flex"; // using flex to center content
+            slides[slideIndex-1].classList.add("active");
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(function() {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>
